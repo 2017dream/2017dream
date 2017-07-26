@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>唯理想与代码不可辜负</title>
+  <subtitle>Welcome to Chao Wu&#39;s blog</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-07-25T13:58:27.314Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Chao Wu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Say Hello</title>
+    <link href="http://yoursite.com/2017/07/26/say-hello/"/>
+    <id>http://yoursite.com/2017/07/26/say-hello/</id>
+    <published>2017-07-26T01:22:58.405Z</published>
+    <updated>2017-07-25T13:58:27.314Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Say-Hello"><a href="#Say-Hello" class="headerlink" title="Say Hello"></a>Say Hello</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">怀着一颗热忱的心，对关注、支持本站的你，说一声：“你好，我叫武超，请多指教。”</div></pre></td></tr></table></figure>
+<p>Say Hello，是一种态度，是我们从陌生到朋友的开始。    </p>
+<h4 id="做时光里自己的见证者"><a href="#做时光里自己的见证者" class="headerlink" title="做时光里自己的见证者"></a>做时光里自己的见证者</h4><p>这是我开始写博客的初心。<br>世界变化很快，技术环境、生活环境都在更新、迭代、诞生、淘汰。来不及驻留欣赏，想通过这里，把自己的历程记录下来，一来与大家交流，分享与学习，二来供自己查阅，发现不足从而成长。</p>
+<p>我会把博文分好类，有我自己的技术心得和理解，知识的整理与归纳。有我兴致来时写一些生活散文，诗词歌赋。</p>
+<p>如果你觉得我有点意思，可以看看我的简介：<a href="/about">关于</a>。</p>
+<p>That’s all , Thank you!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Say-Hello&quot;&gt;&lt;a href=&quot;#Say-Hello&quot; class=&quot;headerlink&quot; title=&quot;Say Hello&quot;&gt;&lt;/a&gt;Say Hello&lt;/h2&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+    
+    </summary>
+    
+      <category term="闲叙" scheme="http://yoursite.com/categories/%E9%97%B2%E5%8F%99/"/>
+    
+    
+      <category term="首篇" scheme="http://yoursite.com/tags/%E9%A6%96%E7%AF%87/"/>
+    
+  </entry>
+  
+</feed>
