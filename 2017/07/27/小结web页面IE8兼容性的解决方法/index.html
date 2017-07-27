@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="web前端,兼容,IE8," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="唯理想与代码不可辜负" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在项目中遇到的IE8兼容性的问题，Google、百度的一些解决方法，亲测有效。如果你有补充、问题、更多解决方式等，请在文章下方留言。 （φ(&amp;gt;ω&amp;lt;*) 友情提示：本文为了代码的可观性，采用了代码块的方式，不因设备大小而折行。如果你使用的是移动设备浏览，黑色的代码块部分需要手动滑动横向滚动条查看，辛苦哟~）">
+<meta name="keywords" content="web前端,兼容,IE8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小结web页面IE8兼容性的解决方法">
+<meta property="og:url" content="http://yoursite.com/2017/07/27/小结web页面IE8兼容性的解决方法/index.html">
+<meta property="og:site_name" content="唯理想与代码不可辜负">
+<meta property="og:description" content="在项目中遇到的IE8兼容性的问题，Google、百度的一些解决方法，亲测有效。如果你有补充、问题、更多解决方式等，请在文章下方留言。 （φ(&amp;gt;ω&amp;lt;*) 友情提示：本文为了代码的可观性，采用了代码块的方式，不因设备大小而折行。如果你使用的是移动设备浏览，黑色的代码块部分需要手动滑动横向滚动条查看，辛苦哟~）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-27T06:28:29.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小结web页面IE8兼容性的解决方法">
+<meta name="twitter:description" content="在项目中遇到的IE8兼容性的问题，Google、百度的一些解决方法，亲测有效。如果你有补充、问题、更多解决方式等，请在文章下方留言。 （φ(&amp;gt;ω&amp;lt;*) 友情提示：本文为了代码的可观性，采用了代码块的方式，不因设备大小而折行。如果你使用的是移动设备浏览，黑色的代码块部分需要手动滑动横向滚动条查看，辛苦哟~）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/27/小结web页面IE8兼容性的解决方法/"/>
+
+
+
+
+
+  <title>小结web页面IE8兼容性的解决方法 | 唯理想与代码不可辜负</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <a href="https://github.com/wuchao2017" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">唯理想与代码不可辜负</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Welcome to Chao Wu's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/27/小结web页面IE8兼容性的解决方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chao Wu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/wcblogheadimg.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="唯理想与代码不可辜负">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小结web页面IE8兼容性的解决方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T09:31:10+08:00">
+                2017-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/27/小结web页面IE8兼容性的解决方法/" class="leancloud_visitors" data-flag-title="小结web页面IE8兼容性的解决方法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              <span class="post-meta-divider">|</span>
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,064 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在项目中遇到的IE8兼容性的问题，Google、百度的一些解决方法，亲测有效。如果你有补充、问题、更多解决方式等，请在文章下方留言。</p>
+<p><font color="#fc6423">（φ(&gt;ω&lt;*) 友情提示：本文为了代码的可观性，采用了代码块的方式，不因设备大小而折行。如果你使用的是移动设备浏览，黑色的代码块部分需要手动滑动横向滚动条查看，辛苦哟~）</font><br><a id="more"></a></p>
+<h3 id="Q1：你的本地有很高的IE版本，打开网页却是默认IE6等低版本渲染？"><a href="#Q1：你的本地有很高的IE版本，打开网页却是默认IE6等低版本渲染？" class="headerlink" title="Q1：你的本地有很高的IE版本，打开网页却是默认IE6等低版本渲染？"></a>Q1：你的本地有很高的IE版本，打开网页却是默认IE6等低版本渲染？</h3>   <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,Chrome=1"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="A1：在-lt-head-gt-中使用以上代码。IE-edge告诉IE使用最新的引擎渲染网页，chrome-1则可以激活Chrome-Frame。"><a href="#A1：在-lt-head-gt-中使用以上代码。IE-edge告诉IE使用最新的引擎渲染网页，chrome-1则可以激活Chrome-Frame。" class="headerlink" title="A1：在&lt;head&gt;中使用以上代码。IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame。"></a>A1：在&lt;head&gt;中使用以上代码。IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame。</h4><h3 id="Q2：如果你使用Bootstrap，发现IE8下有问题？"><a href="#Q2：如果你使用Bootstrap，发现IE8下有问题？" class="headerlink" title="Q2：如果你使用Bootstrap，发现IE8下有问题？"></a>Q2：如果你使用Bootstrap，发现IE8下有问题？</h3><pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></div><div class="line">    &lt;script src="js/respond.min.js"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="js/html5shiv.js"&gt;&lt;/script&gt;</div><div class="line">&lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A2：在-lt-head-gt-中使用hack方式。respond-js解决IE8的响应式布局与媒体查询特性的支持-html5shiv-js解决IE8对HTML5标签的支持"><a href="#A2：在-lt-head-gt-中使用hack方式。respond-js解决IE8的响应式布局与媒体查询特性的支持-html5shiv-js解决IE8对HTML5标签的支持" class="headerlink" title="A2：在&lt;head&gt;中使用hack方式。respond.js解决IE8的响应式布局与媒体查询特性的支持;html5shiv.js解决IE8对HTML5标签的支持."></a>A2：在&lt;head&gt;中使用hack方式。respond.js解决IE8的响应式布局与媒体查询特性的支持;html5shiv.js解决IE8对HTML5标签的支持.</h4><h3 id="Q3：你使用的Jquery版本较高，IE8环境下报错？"><a href="#Q3：你使用的Jquery版本较高，IE8环境下报错？" class="headerlink" title="Q3：你使用的Jquery版本较高，IE8环境下报错？"></a>Q3：你使用的Jquery版本较高，IE8环境下报错？</h3><pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></div><div class="line">    &lt;script src="js/jquery.1.8.3.min.js"&gt;&lt;/script&gt;</div><div class="line">&lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A3：在-lt-head-gt-中使用hack方式。IE8下使用2-0以下Jquery版本。"><a href="#A3：在-lt-head-gt-中使用hack方式。IE8下使用2-0以下Jquery版本。" class="headerlink" title="A3：在&lt;head&gt;中使用hack方式。IE8下使用2.0以下Jquery版本。"></a>A3：在&lt;head&gt;中使用hack方式。IE8下使用2.0以下Jquery版本。</h4><h3 id="Q4：IE10及以下对表单placeholder属性的支持不友好？"><a href="#Q4：IE10及以下对表单placeholder属性的支持不友好？" class="headerlink" title="Q4：IE10及以下对表单placeholder属性的支持不友好？"></a>Q4：IE10及以下对表单placeholder属性的支持不友好？</h3><pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if lt IE 11]&gt;</span></div><div class="line">    &lt;script src="js/placeholder.js"&gt;&lt;/script&gt;</div><div class="line">&lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A4：在-lt-head-gt-中使用hack方式。如果你觉得太重，可以自己写一段JS，实现类似的效果。"><a href="#A4：在-lt-head-gt-中使用hack方式。如果你觉得太重，可以自己写一段JS，实现类似的效果。" class="headerlink" title="A4：在&lt;head&gt;中使用hack方式。如果你觉得太重，可以自己写一段JS，实现类似的效果。"></a>A4：在&lt;head&gt;中使用hack方式。如果你觉得太重，可以自己写一段JS，实现类似的效果。</h4><h3 id="Q5：你需要使指定元素在IE8下使用另外的样式与JS？"><a href="#Q5：你需要使指定元素在IE8下使用另外的样式与JS？" class="headerlink" title="Q5：你需要使指定元素在IE8下使用另外的样式与JS？"></a>Q5：你需要使指定元素在IE8下使用另外的样式与JS？</h3><pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></div><div class="line">    &lt;html class="ie8"&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        //....</div><div class="line">    &lt;/script&gt;</div><div class="line">&lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A5-在-lt-head-gt-中使用hack方式。在样式表中，你可以类似这样写："><a href="#A5-在-lt-head-gt-中使用hack方式。在样式表中，你可以类似这样写：" class="headerlink" title="A5: 在&lt;head&gt;中使用hack方式。在样式表中，你可以类似这样写："></a>A5: 在&lt;head&gt;中使用hack方式。在样式表中，你可以类似这样写：</h4><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ie8</span> <span class="selector-class">.wuchao</span>&#123;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#32ccfe</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="Q6：你需要在IE8下做一个圆形头像？图像为用户上传，无法使用切图的方式？别方。"><a href="#Q6：你需要在IE8下做一个圆形头像？图像为用户上传，无法使用切图的方式？别方。" class="headerlink" title="Q6：你需要在IE8下做一个圆形头像？图像为用户上传，无法使用切图的方式？别方。"></a>Q6：你需要在IE8下做一个圆形头像？图像为用户上传，无法使用切图的方式？别方。</h3><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.ie8</span> <span class="selector-class">.wuchao</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">2</span>;</div><div class="line">    <span class="attribute">behavior</span>:<span class="built_in">url</span>(PIE.htc);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A6：可以使用PIE-htc。网上搜索一下这个文件，down到你的项目根目录下。behavior使用绝对路径即可。该元素需要有一个position与z-index，值不要求，z-index大一点就好。"><a href="#A6：可以使用PIE-htc。网上搜索一下这个文件，down到你的项目根目录下。behavior使用绝对路径即可。该元素需要有一个position与z-index，值不要求，z-index大一点就好。" class="headerlink" title="A6：可以使用PIE.htc。网上搜索一下这个文件，down到你的项目根目录下。behavior使用绝对路径即可。该元素需要有一个position与z-index，值不要求，z-index大一点就好。"></a>A6：可以使用PIE.htc。网上搜索一下这个文件，down到你的项目根目录下。behavior使用绝对路径即可。该元素需要有一个position与z-index，值不要求，z-index大一点就好。</h4><h3 id="Q7：与透明度相关的兼容使你有些苦恼？"><a href="#Q7：与透明度相关的兼容使你有些苦恼？" class="headerlink" title="Q7：与透明度相关的兼容使你有些苦恼？"></a>Q7：与透明度相关的兼容使你有些苦恼？</h3><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wuchao</span>&#123;</div><div class="line">    <span class="attribute">opacity</span>:<span class="number">0.8</span>;</div><div class="line">    <span class="attribute">filter</span>: progid:DXImageTransform.Microsoft.<span class="built_in">Alpha</span>(opacity=80);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A7：使用opacity做透明度，可以用以上兼容。"><a href="#A7：使用opacity做透明度，可以用以上兼容。" class="headerlink" title="A7：使用opacity做透明度，可以用以上兼容。"></a>A7：使用opacity做透明度，可以用以上兼容。</h4><pre><code>    rgba颜色的解决方式有很多，这里说两种。
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wuchao</span>&#123;</div><div class="line">    <span class="attribute">-pie-background</span>: <span class="built_in">rgba</span>(0,0,0,0.4);</div><div class="line">    <span class="attribute">behavior</span>:<span class="built_in">url</span>(PIE.htc);</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">2</span>;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="comment">/*有点傻瓜式，但是好用。缺点：对background-color:rgba()这种好像是无效的。*/</span></div><div class="line">&#125;</div><div class="line"><span class="selector-class">.wuchao2</span>&#123;</div><div class="line">    <span class="attribute">filter</span>:progid:DXImageTransform.Microsoft.<span class="built_in">Gradient</span>(enabled=bEnabled,startColorStr=#7f000000,endColorStr=#7f000000);</div><div class="line">    <span class="comment">/*使用滤镜渐变的写法，将开始颜色与结束颜色一致，实现了一个不渐变的纯透明度颜色。后六位是颜色值，将rgba值转化而来。#前两位代表了设定的透明度。</span></div><div class="line">    0.1——19；0.2——33；0.3——4C；0.4——66；0.5——7F；0.6——99；0.7——B2；0.8——C8；0.9——E5；1——FF；*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="Q8-圆角可以搞定，那么阴影呢？"><a href="#Q8-圆角可以搞定，那么阴影呢？" class="headerlink" title="Q8: 圆角可以搞定，那么阴影呢？"></a>Q8: 圆角可以搞定，那么阴影呢？</h3><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wuchao</span>&#123;</div><div class="line">    <span class="attribute">-moz-box-shadow</span>:<span class="number">1px</span> <span class="number">3px</span> <span class="number">3px</span> <span class="number">#666</span>;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>:<span class="number">1px</span> <span class="number">3px</span> <span class="number">3px</span> <span class="number">#666</span>;</div><div class="line">    <span class="attribute">box-shadow</span>:<span class="number">1px</span> <span class="number">3px</span> <span class="number">3px</span> <span class="number">#666</span>;</div><div class="line">    <span class="attribute">position</span>:relative;</div><div class="line">    <span class="attribute">behavior</span>:<span class="built_in">url</span>(pie.htc);</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A8-是的，我已经不好意思去写了。"><a href="#A8-是的，我已经不好意思去写了。" class="headerlink" title="A8: 是的，我已经不好意思去写了。"></a>A8: 是的，我已经不好意思去写了。</h4><h3 id="Q9-IE8说：background-size，你奈我何？"><a href="#Q9-IE8说：background-size，你奈我何？" class="headerlink" title="Q9: IE8说：background-size，你奈我何？"></a>Q9: IE8说：background-size，你奈我何？</h3><pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wuchao</span>&#123;</div><div class="line">    <span class="attribute">filter</span>:progid:DXImageTransform.Microsoft.<span class="built_in">AlphaImageLoader</span>(src=<span class="string">'images/mylesson/diploma.png'</span>,sizingMethod=<span class="string">'scale'</span>);</div><div class="line">    <span class="attribute">-ms-filter</span>:<span class="string">"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/mylesson/diploma.png',sizingMethod='scale')"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A9：这里的src也为绝对路径。这么容易？No。如果你使用了background-image，你会发现出现了两张错乱背景图。那么"><a href="#A9：这里的src也为绝对路径。这么容易？No。如果你使用了background-image，你会发现出现了两张错乱背景图。那么" class="headerlink" title="A9：这里的src也为绝对路径。这么容易？No。如果你使用了background-image，你会发现出现了两张错乱背景图。那么"></a>A9：这里的src也为绝对路径。这么容易？No。如果你使用了background-image，你会发现出现了两张错乱背景图。那么</h4><pre><code><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.ie8 .wuchao&#123;</div><div class="line">    background-image：none！important;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="Q10：如果你写原生JS，又用到了className的DOM查询，IE8又闹小情绪了。"><a href="#Q10：如果你写原生JS，又用到了className的DOM查询，IE8又闹小情绪了。" class="headerlink" title="Q10：如果你写原生JS，又用到了className的DOM查询，IE8又闹小情绪了。"></a>Q10：如果你写原生JS，又用到了className的DOM查询，IE8又闹小情绪了。</h3><pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">document</span>.getElementsByClassName)&#123;</div><div class="line">   <span class="built_in">document</span>.getElementsByClassName = <span class="function"><span class="keyword">function</span>(<span class="params">className, element</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> children = (element || <span class="built_in">document</span>).getElementsByTagName(<span class="string">'*'</span>);</div><div class="line">        <span class="keyword">var</span> elements = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;children.length; i++)&#123;</div><div class="line">            <span class="keyword">var</span> child = children[i];</div><div class="line">            <span class="keyword">var</span> classNames = child.className.split(<span class="string">' '</span>);</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">0</span>; j&lt;classNames.length; j++)&#123;</div><div class="line">                 <span class="keyword">if</span> (classNames[j] == className)&#123;</div><div class="line">                     elements.push(child);</div><div class="line">                     <span class="keyword">break</span>;</div><div class="line">                 &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> elements;</div><div class="line">   &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A10：为不开心的IE8宝宝定制一个getElementsByClassName的方法。记得放到你的DOM查询前面。"><a href="#A10：为不开心的IE8宝宝定制一个getElementsByClassName的方法。记得放到你的DOM查询前面。" class="headerlink" title="A10：为不开心的IE8宝宝定制一个getElementsByClassName的方法。记得放到你的DOM查询前面。"></a>A10：为不开心的IE8宝宝定制一个getElementsByClassName的方法。记得放到你的DOM查询前面。</h4><h3 id="Q11：你需要自己开发canvas效果，IE8觉得太辛苦想罢工？"><a href="#Q11：你需要自己开发canvas效果，IE8觉得太辛苦想罢工？" class="headerlink" title="Q11：你需要自己开发canvas效果，IE8觉得太辛苦想罢工？"></a>Q11：你需要自己开发canvas效果，IE8觉得太辛苦想罢工？</h3><pre><code><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></div><div class="line">&lt;script src="js/excanvas.js"&gt;&lt;/script&gt;</div><div class="line">&lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+</code></pre><h4 id="A11："><a href="#A11：" class="headerlink" title="A11："></a>A11：</h4><pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//举例</span></div><div class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"canvas"</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.G_vmlCanvasManager!=<span class="string">"undefined"</span>) &#123;</div><div class="line">   c = <span class="built_in">window</span>.G_vmlCanvasManager.initElement(c);</div><div class="line">&#125;</div><div class="line"><span class="comment">//如果你用到innerText，需要做它的兼容。例如获取a的innerText</span></div><div class="line"><span class="keyword">var</span> a = getElementById(<span class="string">'canval'</span>);</div><div class="line"><span class="keyword">var</span> aval = a.innerText || a.textContent;</div></pre></td></tr></table></figure>
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">-------------The End <i class="fa fa-paw"> Thanks for your reading</i>-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web前端/" rel="tag"><i class="fa fa-tag"></i> web前端</a>
+          
+            <a href="/tags/兼容/" rel="tag"><i class="fa fa-tag"></i> 兼容</a>
+          
+            <a href="/tags/IE8/" rel="tag"><i class="fa fa-tag"></i> IE8</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/26/say-hello/" rel="next" title="Say Hello">
+                <i class="fa fa-chevron-left"></i> Say Hello
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTc0Ny82MzEz"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/wcblogheadimg.png"
+               alt="Chao Wu" />
+          <p class="site-author-name" itemprop="name">Chao Wu</p>
+           
+              <p class="site-description motion-element" itemprop="description">放轻松，我并不高冷</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              订阅关注我ヾ(^∀^)ﾉ
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wuchao2017" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1：你的本地有很高的IE版本，打开网页却是默认IE6等低版本渲染？"><span class="nav-number">1.</span> <span class="nav-text">Q1：你的本地有很高的IE版本，打开网页却是默认IE6等低版本渲染？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A1：在-lt-head-gt-中使用以上代码。IE-edge告诉IE使用最新的引擎渲染网页，chrome-1则可以激活Chrome-Frame。"><span class="nav-number">1.1.</span> <span class="nav-text">A1：在<head>中使用以上代码。IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2：如果你使用Bootstrap，发现IE8下有问题？"><span class="nav-number">2.</span> <span class="nav-text">Q2：如果你使用Bootstrap，发现IE8下有问题？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A2：在-lt-head-gt-中使用hack方式。respond-js解决IE8的响应式布局与媒体查询特性的支持-html5shiv-js解决IE8对HTML5标签的支持"><span class="nav-number">2.1.</span> <span class="nav-text">A2：在<head>中使用hack方式。respond.js解决IE8的响应式布局与媒体查询特性的支持;html5shiv.js解决IE8对HTML5标签的支持.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3：你使用的Jquery版本较高，IE8环境下报错？"><span class="nav-number">3.</span> <span class="nav-text">Q3：你使用的Jquery版本较高，IE8环境下报错？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A3：在-lt-head-gt-中使用hack方式。IE8下使用2-0以下Jquery版本。"><span class="nav-number">3.1.</span> <span class="nav-text">A3：在<head>中使用hack方式。IE8下使用2.0以下Jquery版本。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4：IE10及以下对表单placeholder属性的支持不友好？"><span class="nav-number">4.</span> <span class="nav-text">Q4：IE10及以下对表单placeholder属性的支持不友好？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A4：在-lt-head-gt-中使用hack方式。如果你觉得太重，可以自己写一段JS，实现类似的效果。"><span class="nav-number">4.1.</span> <span class="nav-text">A4：在<head>中使用hack方式。如果你觉得太重，可以自己写一段JS，实现类似的效果。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5：你需要使指定元素在IE8下使用另外的样式与JS？"><span class="nav-number">5.</span> <span class="nav-text">Q5：你需要使指定元素在IE8下使用另外的样式与JS？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A5-在-lt-head-gt-中使用hack方式。在样式表中，你可以类似这样写："><span class="nav-number">5.1.</span> <span class="nav-text">A5: 在<head>中使用hack方式。在样式表中，你可以类似这样写：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6：你需要在IE8下做一个圆形头像？图像为用户上传，无法使用切图的方式？别方。"><span class="nav-number">6.</span> <span class="nav-text">Q6：你需要在IE8下做一个圆形头像？图像为用户上传，无法使用切图的方式？别方。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A6：可以使用PIE-htc。网上搜索一下这个文件，down到你的项目根目录下。behavior使用绝对路径即可。该元素需要有一个position与z-index，值不要求，z-index大一点就好。"><span class="nav-number">6.1.</span> <span class="nav-text">A6：可以使用PIE.htc。网上搜索一下这个文件，down到你的项目根目录下。behavior使用绝对路径即可。该元素需要有一个position与z-index，值不要求，z-index大一点就好。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7：与透明度相关的兼容使你有些苦恼？"><span class="nav-number">7.</span> <span class="nav-text">Q7：与透明度相关的兼容使你有些苦恼？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A7：使用opacity做透明度，可以用以上兼容。"><span class="nav-number">7.1.</span> <span class="nav-text">A7：使用opacity做透明度，可以用以上兼容。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8-圆角可以搞定，那么阴影呢？"><span class="nav-number">8.</span> <span class="nav-text">Q8: 圆角可以搞定，那么阴影呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A8-是的，我已经不好意思去写了。"><span class="nav-number">8.1.</span> <span class="nav-text">A8: 是的，我已经不好意思去写了。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9-IE8说：background-size，你奈我何？"><span class="nav-number">9.</span> <span class="nav-text">Q9: IE8说：background-size，你奈我何？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A9：这里的src也为绝对路径。这么容易？No。如果你使用了background-image，你会发现出现了两张错乱背景图。那么"><span class="nav-number">9.1.</span> <span class="nav-text">A9：这里的src也为绝对路径。这么容易？No。如果你使用了background-image，你会发现出现了两张错乱背景图。那么</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q10：如果你写原生JS，又用到了className的DOM查询，IE8又闹小情绪了。"><span class="nav-number">10.</span> <span class="nav-text">Q10：如果你写原生JS，又用到了className的DOM查询，IE8又闹小情绪了。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A10：为不开心的IE8宝宝定制一个getElementsByClassName的方法。记得放到你的DOM查询前面。"><span class="nav-number">10.1.</span> <span class="nav-text">A10：为不开心的IE8宝宝定制一个getElementsByClassName的方法。记得放到你的DOM查询前面。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q11：你需要自己开发canvas效果，IE8觉得太辛苦想罢工？"><span class="nav-number">11.</span> <span class="nav-text">Q11：你需要自己开发canvas效果，IE8觉得太辛苦想罢工？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A11："><span class="nav-number">11.1.</span> <span class="nav-text">A11：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chao Wu</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站被“临幸”次数 (UV) :  <span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="theme-info">
+  <span class="post-count">博客全站共1.3k字</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("pqHJmVxNm6DVsz9xeqOENT5h-gzGzoHsz", "YPPxVF5NJxD9cathxjLGs70N");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+  
+    <script type="text/javascript" src="/live2d/script.js"></script>
+    <canvas id="live2dcanvas" width="150" height="300" class="live2d"></canvas>
+    <style>
+      #live2dcanvas {
+        position: fixed;
+        right: 0px;
+        z-index: 999;
+        pointer-events: none;
+        bottom: -30px;
+      }
+    </style>
+    <script>loadlive2d("live2dcanvas" ,"/live2d/assets/wanko/wanko.model.json")</script>
+  
+</body>
+</html>
