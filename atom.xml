@@ -4,9 +4,9 @@
   <subtitle>Welcome to Chao Wu&#39;s blog</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://itwuchao.com/"/>
   <updated>2017-07-27T01:40:52.144Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://itwuchao.com/</id>
   
   <author>
     <name>Chao Wu</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Say Hello</title>
-    <link href="http://yoursite.com/2017/07/29/say-hello/"/>
-    <id>http://yoursite.com/2017/07/29/say-hello/</id>
+    <link href="http://itwuchao.com/2017/07/29/say-hello/"/>
+    <id>http://itwuchao.com/2017/07/29/say-hello/</id>
     <published>2017-07-29T04:16:17.767Z</published>
     <updated>2017-07-27T01:40:52.144Z</updated>
     
@@ -37,17 +37,17 @@
     
     </summary>
     
-      <category term="闲叙" scheme="http://yoursite.com/categories/%E9%97%B2%E5%8F%99/"/>
+      <category term="闲叙" scheme="http://itwuchao.com/categories/%E9%97%B2%E5%8F%99/"/>
     
     
-      <category term="首篇" scheme="http://yoursite.com/tags/%E9%A6%96%E7%AF%87/"/>
+      <category term="首篇" scheme="http://itwuchao.com/tags/%E9%A6%96%E7%AF%87/"/>
     
   </entry>
   
   <entry>
     <title>小结web页面IE8兼容性的解决方法</title>
-    <link href="http://yoursite.com/2017/07/27/%E5%B0%8F%E7%BB%93web%E9%A1%B5%E9%9D%A2IE8%E5%85%BC%E5%AE%B9%E6%80%A7%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2017/07/27/小结web页面IE8兼容性的解决方法/</id>
+    <link href="http://itwuchao.com/2017/07/27/%E5%B0%8F%E7%BB%93web%E9%A1%B5%E9%9D%A2IE8%E5%85%BC%E5%AE%B9%E6%80%A7%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://itwuchao.com/2017/07/27/小结web页面IE8兼容性的解决方法/</id>
     <published>2017-07-27T01:31:10.000Z</published>
     <updated>2017-07-27T06:28:29.105Z</updated>
     
@@ -78,14 +78,14 @@
     
     </summary>
     
-      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://itwuchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="web前端" scheme="http://yoursite.com/tags/web%E5%89%8D%E7%AB%AF/"/>
+      <category term="web前端" scheme="http://itwuchao.com/tags/web%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="兼容" scheme="http://yoursite.com/tags/%E5%85%BC%E5%AE%B9/"/>
+      <category term="兼容" scheme="http://itwuchao.com/tags/%E5%85%BC%E5%AE%B9/"/>
     
-      <category term="IE8" scheme="http://yoursite.com/tags/IE8/"/>
+      <category term="IE8" scheme="http://itwuchao.com/tags/IE8/"/>
     
   </entry>
   
