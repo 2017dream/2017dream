@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.itwuchao.com/"/>
-  <updated>2017-07-27T01:40:52.144Z</updated>
+  <updated>2017-08-18T05:47:18.029Z</updated>
   <id>http://www.itwuchao.com/</id>
   
   <author>
@@ -16,10 +16,52 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>关于命名对象添加为document对象的明显属性</title>
+    <link href="http://www.itwuchao.com/%E5%85%B3%E4%BA%8EJS%E5%B0%86%E5%91%BD%E5%90%8D%E5%AF%B9%E8%B1%A1%E6%B7%BB%E5%8A%A0%E4%B8%BAdocument%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%98%8E%E6%98%BE%E5%B1%9E%E6%80%A7.html"/>
+    <id>http://www.itwuchao.com/关于JS将命名对象添加为document对象的明显属性.html</id>
+    <published>2017-08-18T03:18:00.000Z</published>
+    <updated>2017-08-18T05:47:18.029Z</updated>
+    
+    <content type="html"><![CDATA[<p>在读红宝书DOM扩展一章时，机缘巧合地注释掉了一行代码。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//var div1 = document.getElementById('div1');</span></div><div class="line"><span class="built_in">console</span>.log(div1.innerHTML);</div></pre></td></tr></table></figure>
+<p>结果，打印效果为：123<br><a id="more"></a><br>Excuse me？amazing！这真是无法描述我的心情。难道是语法糖？<br>于是我将id换成了class<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(div1.innerHTML);</div></pre></td></tr></table></figure>
+<p>结果…你猜？<br>很合理：Uncaught ReferenceError: div1 is not defined<br>翻了书中关于DOM对象的几章，没有收获。<br>给我的小伙伴们描述了下，也都表示没见过。不过我们都一致认为：与浏览器有关。我是在chrome运行的。结果，IE7都可以，火狐最新版也可以。<br>给在国外的前辈去了封邮件。前辈回复“haha”，并给了我一个社区链接。<br>我用’蹩脚’的谷歌翻译下得票最高的回答：<br><div class="note primary"><p>应该发生的是将“命名元素”添加为document对象的明显属性。这是一个非常糟糕的主意，因为它允许元素名称与实际属性冲突document。</p>
+<p>IE也通过添加命名元素作为window对象的属性使情况更糟。这是双重的缺点，因为现在您必须避免document在window您（或项目中的任何其他库代码）可能要使用的对象的任何成员之后命名元素。</p>
+<p>这也意味着这些元素可视为全局变量。幸运的是，在这种情况下，您的代码中的任何真实的全局var或function声明都会影响它们，因此您不必担心在这里命名太多，但如果您尝试使用冲突名称对全局变量进行分配，并且您忘记声明它var会在IE中收到一个错误，因为它会尝试将值分配给元素本身。</p>
+<p>通常被认为是不好的做法，省略var，也可以依靠命名的元素在window全局或全局信息上可见。坚持document.getElementById，这是更广泛的支持，更不模糊。如果您不喜欢打字，您可以编写一个名称较小的简单包装功能。无论哪种方式，使用id-to-element查找缓存都没有意义，因为浏览器通常会优化getElementById调用以使用快速查找; 所有你得到的是元素更改id或从文档中添加/删除时的问题。</p>
+<p>欧朋复制IE，然后WebKit的加入进来，现在都穿上命名元素的以前不标准，实践document特性，并把他们的先前IE-只有实践window都被 标准化的HTML5，其方法是将文件和规范每浏览器作者对我们造成可怕的做法，让他们永远成为网页的一部分。所以Firefox 4也会支持这一点。</p>
+<p>什么是“命名元素”？任何与id任何东西有关name，用于“识别”的目的：即表单，图像，锚点和其他一些，但不是其他不相关的name属性实例，如表单输入字段中的控制名称，参数名称<param>或元数据类型<meta>。“确定” name应该是应该避免的id。</p>
+</div></p>
+<p>附上原文：<br><div class="note default"><p>What is supposed to happen is that ‘named elements’ are added as apparent properties of the document object. This is a really bad idea, as it allows element names to clash with real properties of document.</p>
+<p>IE made the situation worse by also adding named elements as properties of the window object. This is doubly bad in that now you have to avoid naming your elements after any member of either the document or the window object you (or any other library code in your project) might want to use.</p>
+<p>It also means that these elements are visible as global-like variables. Luckily in this case any real global var or function declarations in your code shadow them, so you don’t need to worry so much about naming here, but if you try to do an assignment to a global variable with a clashing name and you forget to declare it var, you’ll get an error in IE as it tries to assign the value to the element itself.</p>
+<p>It’s generally considered bad practice to omit var, as well as to rely on named elements being visible on window or as globals. Stick to document.getElementById, which is more widely-supported and less ambiguous. You can write a trivial wrapper function with a shorter name if you don’t like the typing. Either way, there’s no point in using an id-to-element lookup cache, because browsers typically optimise the getElementById call to use a quick lookup anyway; all you get is problems when elements change id or are added/removed from the document.</p>
+<p>Opera copied IE, then WebKit joined in, and now both the previously-unstandardised practice of putting named elements on document properties, and the previously-IE-only practice of putting them on window are being standardised by HTML5, whose approach is to document and standardise every terrible practice inflicted on us by browser authors, making them part of the web forever. So Firefox 4 will also support this.</p>
+<p>What are ‘named elements’? Anything with an id, and anything with a name being used for ‘identifying’ purposes: that is, forms, images, anchors and a few others, but not other unrelated instances of a name attribute, like control-names in form input fields, parameter names in <param> or metadata type in <meta>. ‘Identifying’ names are the ones that should should be avoided in favour of id.</p>
+</div></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在读红宝书DOM扩展一章时，机缘巧合地注释掉了一行代码。&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;id&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;div1&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;123&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//var div1 = document.getElementById(&#39;div1&#39;);&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(div1.innerHTML);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;结果，打印效果为：123&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.itwuchao.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="web前端" scheme="http://www.itwuchao.com/tags/web%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Say Hello</title>
     <link href="http://www.itwuchao.com/say-hello.html"/>
     <id>http://www.itwuchao.com/say-hello.html</id>
-    <published>2017-08-01T06:45:13.226Z</published>
+    <published>2017-08-18T02:41:20.295Z</published>
     <updated>2017-07-27T01:40:52.144Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Say-Hello"><a href="#Say-Hello" class="headerlink" title="Say Hello"></a>Say Hello</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">怀着一颗热忱的心，对关注、支持本站的你，说一声：“你好，我叫武超，请多指教。”</div></pre></td></tr></table></figure>
