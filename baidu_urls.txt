@@ -1,3 +1,4 @@
+http://www.itwuchao.com/使用函数节流优化频繁触发的事件函数.html
 http://www.itwuchao.com/关于JS将命名对象添加为document对象的明显属性.html
 http://www.itwuchao.com/say-hello.html
 http://www.itwuchao.com/小结web页面IE8兼容性的解决方法.html
